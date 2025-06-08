@@ -55,3 +55,13 @@ async def delete_book(book_title:str):
             BOOKS.pop(i)
             break
 
+
+# get all books form a specific author using path or query parameters
+
+@app.get('/books/get_all_books/{author}')
+async def get_all_books_by_author(author:str):
+    books_to_return=[]
+    for book in BOOKS:
+        if book.get('Author').casefold()==author.casefold():
+            books_to_return.append(book)
+    return books_to_return
